@@ -86,10 +86,20 @@ function App() {
       img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/e41f26.png",
     },
   ]);
+  let totalStrength = team.length
+    ? team.reduce(
+        (accumulator, fighter) => (accumulator += fighter.strength),
+        0,
+      )
+    : 0;
+  let totalAgility = team.length
+    ? team.reduce((accumulator, fighter) => (accumulator += fighter.agility), 0)
+    : 0;
 
   const handleAddFighter = (fighter) => {
+    let total = 0;
     if (fighter.price <= money) {
-      team.push(fighter);
+      setTeam([...team, fighter]);
       setZombieFighters(
         zombieFighters.filter((member) => member.id !== fighter.id),
       );
@@ -97,6 +107,12 @@ function App() {
     } else {
       console.log("Not enough money");
     }
+  };
+
+  const handleRemoveFighter = (fighter) => {
+    setTeam(team.filter((member) => member.id !== fighter.id));
+    setZombieFighters([...zombieFighters, fighter]);
+    setMoney(money + fighter.price);
   };
 
   return (
@@ -115,6 +131,8 @@ function App() {
         })}
       </ul>
       <h1>Your Team:</h1>
+      <h3>Total Strenght: {totalStrength}</h3>
+      <h3>Total Agility: {totalAgility}</h3>
       {!team.length ? (
         <p>Pick some team members!</p>
       ) : (
@@ -124,6 +142,9 @@ function App() {
               <li key={fighter.id}>
                 Name: {fighter.name}, Price: {fighter.price}, Strength:
                 {fighter.strength}, Agility: {fighter.agility}
+                <button onClick={() => handleRemoveFighter(fighter)}>
+                  Remove
+                </button>
               </li>
             );
           })}
