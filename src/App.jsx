@@ -88,14 +88,16 @@ function App() {
   ]);
 
   const handleAddFighter = (fighter) => {
-    team.push(fighter);
-    setZombieFighters(
-      zombieFighters.filter((member) => member.id !== fighter.id),
-    );
-    setMoney(money - fighter.price);
+    if (fighter.price <= money) {
+      team.push(fighter);
+      setZombieFighters(
+        zombieFighters.filter((member) => member.id !== fighter.id),
+      );
+      setMoney(money - fighter.price);
+    } else {
+      console.log("Not enough money");
+    }
   };
-  console.log(team);
-  console.log(zombieFighters);
 
   return (
     <>
