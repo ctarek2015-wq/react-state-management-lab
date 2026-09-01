@@ -11,7 +11,7 @@ function App() {
       price: 12,
       strength: 6,
       agility: 4,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/0c2d6b.png",
+      img: "https://github.com/Bahrain-SEB-15/react-state-management-lab/blob/main/assets/033a16.png?raw=true",
     },
     {
       id: 2,
@@ -120,23 +120,12 @@ function App() {
 
   return (
     <>
-      <h1>Money: {money}</h1>
+      <h1>Zombie Fighters</h1>
+      <h3>Money: {money}</h3>
       {!isEnoughMoney && <h3>"Not enough money"</h3>}
-      <h1>Zombie Fighters:</h1>
-      <ul>
-        {zombieFighters.map((fighter) => {
-          return (
-            <li key={fighter.id}>
-              Name: {fighter.name}, Price: {fighter.price}, Strength:
-              {fighter.strength}, Agility: {fighter.agility}
-              <button onClick={() => handleAddFighter(fighter)}>Add</button>
-            </li>
-          );
-        })}
-      </ul>
-      <h1>Your Team:</h1>
       <h3>Total Strenght: {totalStrength}</h3>
       <h3>Total Agility: {totalAgility}</h3>
+      <h1>Team:</h1>
       {!team.length ? (
         <p>Pick some team members!</p>
       ) : (
@@ -144,8 +133,13 @@ function App() {
           {team.map((fighter) => {
             return (
               <li key={fighter.id}>
-                Name: {fighter.name}, Price: {fighter.price}, Strength:
-                {fighter.strength}, Agility: {fighter.agility}
+                <img src={fighter.img} alt="rtfygu" />
+                <br />
+                Name: {fighter.name} <br />
+                Price: {fighter.price} <br />
+                Strength:
+                {fighter.strength} <br />
+                Agility: {fighter.agility} <br />
                 <button onClick={() => handleRemoveFighter(fighter)}>
                   Remove
                 </button>
@@ -154,6 +148,23 @@ function App() {
           })}
         </ul>
       )}
+      <h1>Fighters:</h1>
+      <ul>
+        {zombieFighters.map((fighter) => {
+          return (
+            <li key={fighter.id}>
+              <img src={fighter.img} alt="rtfygu" />
+              <br />
+              Name: {fighter.name} <br />
+              Price: {fighter.price} <br />
+              Strength:
+              {fighter.strength} <br />
+              Agility: {fighter.agility} <br />
+              <button onClick={() => handleAddFighter(fighter)}>Add</button>
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 }
