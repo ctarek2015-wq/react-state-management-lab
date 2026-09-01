@@ -86,6 +86,7 @@ function App() {
       img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/e41f26.png",
     },
   ]);
+  const [isEnoughMoney, setIsEnoughMoney] = useState(true);
   let totalStrength = team.length
     ? team.reduce(
         (accumulator, fighter) => (accumulator += fighter.strength),
@@ -97,14 +98,15 @@ function App() {
     : 0;
 
   const handleAddFighter = (fighter) => {
-    let total = 0;
     if (fighter.price <= money) {
       setTeam([...team, fighter]);
       setZombieFighters(
         zombieFighters.filter((member) => member.id !== fighter.id),
       );
       setMoney(money - fighter.price);
+      setIsEnoughMoney(true);
     } else {
+      setIsEnoughMoney(false);
       console.log("Not enough money");
     }
   };
@@ -113,11 +115,13 @@ function App() {
     setTeam(team.filter((member) => member.id !== fighter.id));
     setZombieFighters([...zombieFighters, fighter]);
     setMoney(money + fighter.price);
+    setIsEnoughMoney(true);
   };
 
   return (
     <>
       <h1>Money: {money}</h1>
+      {!isEnoughMoney && <h3>"Not enough money"</h3>}
       <h1>Zombie Fighters:</h1>
       <ul>
         {zombieFighters.map((fighter) => {
