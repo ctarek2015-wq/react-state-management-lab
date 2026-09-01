@@ -101,6 +101,7 @@ function App() {
 
   return (
     <>
+      <h1>Money: {money}</h1>
       <h1>Zombie Fighters:</h1>
       <ul>
         {zombieFighters.map((fighter) => {
@@ -113,7 +114,21 @@ function App() {
           );
         })}
       </ul>
-      <h1>Money: {money}</h1>
+      <h1>Your Team:</h1>
+      {!team.length ? (
+        <p>Pick some team members!</p>
+      ) : (
+        <ul>
+          {team.map((fighter) => {
+            return (
+              <li key={fighter.id}>
+                Name: {fighter.name}, Price: {fighter.price}, Strength:
+                {fighter.strength}, Agility: {fighter.agility}
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </>
   );
 }
